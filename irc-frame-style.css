@@ -1,0 +1,47 @@
+body.irc {
+    font-family: Helvetica,Arial,sans-serif;
+    background-color: #fff;
+    font-size: 14px;
+    white-space:nowrap;
+    overflow: hidden;
+}
+div.date {
+    background-color: #606060;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 9px;
+}
+div.date a {
+    color: #fff;
+}
+span.nick {
+    white-space: nowrap;
+    color: #ee8514;
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+	margin-top:0px;
+	margin-right:6px;
+	text-align:right;
+}
+span.date {
+    white-space: nowrap;
+    color: #ee8514;
+    font-weight: bold;
+	margin-bottom: 4px;
+}
+span.msg {
+    white-space: normal;
+    color: #606060;
+    width: 400px;
+    display: inline-block;
+	margin-top:0px;
+}
+a {
+    color: #ee8514;
+    text-decoration: underline;
+    font-weight: bold;
+}
+a:hover {
+    color: #000;
+}

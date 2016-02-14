@@ -1,0 +1,16 @@
+div.frameContainer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    z-index: 4;
+    opacity: 1;
+    width: 530px;
+    height: 263px;
+}
+div.frameContainer iframe {
+    width: 530px;
+    height: 263px;
+    frameborder: 0;
+    overflow: hidden;
+}
