@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>#HLFallout Chat History</title>
+    <style>
+        body.irc {
+            font-family: Helvetica,Arial,sans-serif;
+            background-color: #fff;
+            font-size: 14px;
+            white-space:nowrap;
+            overflow: hidden;
+        }
+        div.date {
+            background-color: #606060;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+        div.date a {
+            color: #fff;
+        }
+        span.nick {
+            white-space: nowrap;
+            color: #ee8514;
+            font-weight: bold;
+            width: 80px;
+            display: inline-block;
+        }
+        span.date {
+            white-space: nowrap;
+            color: #ee8514;
+            font-weight: bold;
+        }
+        span.msg {
+            white-space: normal;
+            color: #606060;
+            width: 400px;
+            display: inline-block;
+        }
+        a {
+            color: #ee8514;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #000;
+        }
+    </style>
+    <script type="text/javascript">
+        function TextNodeAbbreviation(element, maxLength) {
+            this.element = element;
+            this.maxLength = maxLength;
+            this.fullText = this.sourceTextNode().data;
+            this.cappedText = this.capText();
+        }
+        TextNodeAbbreviation.prototype.capText = function() {
+            var sourceText = this.sourceText();
+            return (sourceText.length > this.maxLength ? sourceText.substring(0, this.maxLength - 3) + "..." : null);
+        }
+        TextNodeAbbreviation.prototype.abbreviatorTextNode = function() {
+            return (this.cappedText != null ? document.createTextNode(this.cappedText) : null);
+        }
+        TextNodeAbbreviation.prototype.sourceTextNode = function() {
+            return this.element.childNodes[0];
+        }
+        TextNodeAbbreviation.prototype.sourceText = function() {
+            return this.sourceTextNode().data;
+        }
+        TextNodeAbbreviation.prototype.onAbbreviate = function(abbreviateHandler) {
+            if (this.cappedText != null) {
+                abbreviateHandler(this.element, this.sourceTextNode(), this.abbreviatorTextNode());
+            }
+        }
+        function abbreviate(elements, maxLength) {
+            for (var i = 0; i < elements.length; i++) {
+                var abbreviation = new TextNodeAbbreviation(elements[i], maxLength);
+                abbreviation.onAbbreviate(function(element, sourceTextNode, abbreviatorTextNode) {
+                    element.replaceChild(abbreviatorTextNode, sourceTextNode);
+                    element.setAttribute("title", sourceTextNode.data);
+                });
+            }
+        }
+        function abbreviateAll() {
+            abbreviate(document.getElementsByClassName("nick"), 10);
+            abbreviate(document.getElementsByClassName("msg"), 60);
+        }
+    </script>
+</head>
+<body class="irc" onload="abbreviateAll()">
+    <div class="date">
+        <div style="float:right">IRC_LOG_DATE</div>
+        <div style="text-align:left;">
+            <a href="http://gamesurge.net/chat" target="_blank" alt="Join us now!">#hlfallout</a>
+        </div>
+    </div>
+
+    <span class="nick">NICK16 </span><span class="msg">TEXT16</span><br />
+    <span class="nick">NICK15 </span><span class="msg">TEXT15</span><br />
+    <span class="nick">NICK14 </span><span class="msg">TEXT14</span><br />
+    <span class="nick">NICK13 </span><span class="msg">TEXT13</span><br />
+    <span class="nick">NICK12 </span><span class="msg">TEXT12</span><br />
+    <span class="nick">NICK11 </span><span class="msg">TEXT11</span><br />
+    <span class="nick">NICK10 </span><span class="msg">TEXT10</span><br />
+    <span class="nick">NICK9 </span><span class="msg">TEXT9</span><br />
+    <span class="nick">NICK8 </span><span class="msg">TEXT8</span><br />
+    <span class="nick">NICK7 </span><span class="msg">TEXT7</span><br />
+    <span class="nick">NICK6 </span><span class="msg">TEXT6</span><br />
+    <span class="nick">NICK5 </span><span class="msg">TEXT5</span><br />
+    <span class="nick">NICK4 </span><span class="msg">TEXT4</span><br />
+    <span class="nick">NICK3 </span><span class="msg">TEXT3</span><br />
+    <span class="nick">NICK2 </span><span class="msg">TEXT2</span><br />
+    <span class="nick">NICK1 </span><span class="msg">TEXT1</span><br />
+</body>
+</html>

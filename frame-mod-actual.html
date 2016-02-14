@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>#HLFallout Chat History</title>
+    <style>
+        body.irc {
+            font-family: Helvetica,Arial,sans-serif;
+            background-color: #fff;
+            font-size: 14px;
+            white-space:nowrap;
+            overflow: hidden;
+        }
+        div.date {
+            background-color: #606060;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+        div.date a {
+            color: #fff;
+        }
+        span.nick {
+            white-space: nowrap;
+            color: #ee8514;
+            font-weight: bold;
+            width: 80px;
+            display: inline-block;
+        }
+        span.date {
+            white-space: nowrap;
+            color: #ee8514;
+            font-weight: bold;
+        }
+        span.msg {
+            white-space: normal;
+            color: #606060;
+            width: 400px;
+            display: inline-block;
+        }
+        a {
+            color: #ee8514;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #000;
+        }
+    </style>
+    <script type="text/javascript">
+        function TextNodeAbbreviation(element, maxLength) {
+            this.element = element;
+            this.maxLength = maxLength;
+            this.fullText = this.sourceTextNode().data;
+            this.cappedText = this.capText();
+        }
+        TextNodeAbbreviation.prototype.capText = function() {
+            var sourceText = this.sourceText();
+            return (sourceText.length > this.maxLength ? sourceText.substring(0, this.maxLength - 3) + "..." : null);
+        }
+        TextNodeAbbreviation.prototype.abbreviatorTextNode = function() {
+            return (this.cappedText != null ? document.createTextNode(this.cappedText) : null);
+        }
+        TextNodeAbbreviation.prototype.sourceTextNode = function() {
+            return this.element.childNodes[0];
+        }
+        TextNodeAbbreviation.prototype.sourceText = function() {
+            return this.sourceTextNode().data;
+        }
+        TextNodeAbbreviation.prototype.onAbbreviate = function(abbreviateHandler) {
+            if (this.cappedText != null) {
+                abbreviateHandler(this.element, this.sourceTextNode(), this.abbreviatorTextNode());
+            }
+        }
+        function abbreviate(elements, maxLength) {
+            for (var i = 0; i < elements.length; i++) {
+                var abbreviation = new TextNodeAbbreviation(elements[i], maxLength);
+                abbreviation.onAbbreviate(function(element, sourceTextNode, abbreviatorTextNode) {
+                    element.replaceChild(abbreviatorTextNode, sourceTextNode);
+                    element.setAttribute("title", sourceTextNode.data);
+                });
+            }
+        }
+        function abbreviateAll() {
+            abbreviate(document.getElementsByClassName("nick"), 10);
+            abbreviate(document.getElementsByClassName("msg"), 60);
+        }
+    </script>
+</head>
+<body class="irc" onload="abbreviateAll()">
+    <div class="date">
+        <div style="float:right">Thu Feb 11 17:42:46 2016</div>
+        <div style="text-align:left;">
+            <a href="http://gamesurge.net/chat" target="_blank" alt="Join us now!">#hlfallout</a>
+        </div>
+    </div>
+
+    <span class="nick">Brumisator the Onionator</span><span class="msg">Check it out! <a href="http://gamesurge.net/chat" target="_blank" alt="Join us now!">#hlfallout</a></span><br />
+    <span class="nick">Poseidon</span><span class="msg">Blah blah blah</span><br />
+    <span class="nick">Trooper</span><span class="msg">Dimebag!  Dimebag!</span><br />
+    <span class="nick">Headmonkeys</span><span class="msg">You don't know about Dave Lynch?  Ok, here are a dozen movies you need to watch NAO!</span><br />
+    <span class="nick">Grumpy</span><span class="msg">Aw man, Snow White - the first day she showed up we guys were worried.</span><br />
+    <span class="nick">screech</span><span class="msg">TEXT11</span><br />
+    <span class="nick">Athena</span><span class="msg">
+        She examined the symbol on the fragment she'd found in the buried city. Again the owl. What could its significance be? It seemed as if they had been scattered about in the labyrinth by some unseen hand for a purpose that yet eluded /// most likely the owl was the sigil of the author of these words, which had so /673&amp;$§RFG
+        &amp;%%$ a nebulous memory, as if from a previous life: the owl was the symbol of &amp;#574953(444F4D/ and the goddess #49204!14D2041.5448454E41(% outside, under the moon, or perhaps on the city walls when the wind rose. But there was no time to contemplate this further now, for the automatons had seen her, and their mechanical arms extended towards $%§ the fragment and ran as their beams converged on %$§
+    </span><br />
+    <span class="nick">Pluto</span><span class="msg">TEXT9</span><br />
+    <span class="nick">Apophis</span><span class="msg">TEXT8</span><br />
+    <span class="nick">Big Bad Wolf</span><span class="msg">TEXT7</span><br />
+    <span class="nick">Santa</span><span class="msg">TEXT6</span><br />
+    <span class="nick">Yo Mama</span><span class="msg">So fat</span><br />
+    <span class="nick">Aaron Rodgers</span><span class="msg">I need some god-damn receivers</span><br />
+    <span class="nick">NICK3</span><span class="msg">TEXT3</span><br />
+    <span class="nick">NICK2</span><span class="msg">TEXT2</span><br />
+    <span class="nick">NICK1</span><span class="msg">TEXT1</span><br />
+</body>
+</html>
